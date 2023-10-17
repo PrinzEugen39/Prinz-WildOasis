@@ -1,8 +1,16 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Prinz Wild Oasis
+ <div style="display: flex; justify-content: center; align-items: center;">
+    <img src="https://vitejs.dev/logo.svg" width="80">
+    <img src="https://www.vectorlogo.zone/logos/supabase/supabase-icon.svg" width="80">
+    <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" width="80">
+    <img src="https://miro.medium.com/v2/resize:fit:1400/1*elhu-42TzQEdsFjKDbQhhA.png" width="80">
+</div>
 
-Currently, two official plugins are available:
+### Tech Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://react.dev/) 
+- [React Query](https://tanstack.com/query/latest)
+- [Styled Components](https://styled-components.com/)
+- [Supabase](https://supabase.com/)
