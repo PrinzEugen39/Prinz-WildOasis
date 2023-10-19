@@ -52,8 +52,6 @@ function CabinRow({ cabin }) {
   const { isLoading: isDuplicating, createCabin } = useCreateCabin();
   const { isLoading, mutate } = useDeleteCabin();
 
-  console.log(cabin)
-
   const { id, name, maxCapacity, regularPrice, discount, image, description } = cabin;
 
   function handleDuplicate() {
