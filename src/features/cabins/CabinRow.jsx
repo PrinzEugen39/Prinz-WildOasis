@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins.js";
-import toast from "react-hot-toast";
+import CreateCabinForm from "./CreateCabinForm.jsx";
+import { useDeleteCabin } from "./useDeleteCabin.js";
+
+import { HiSquare2Stack, HiPencil, HiTrash } from "react-icons/hi2";
+import { useCreateCabin } from "./useCreateCabin.js";
 
 const TableRow = styled.div`
   display: grid;
@@ -45,32 +48,51 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const [show, setShow] = useState();
+  const { isLoading: isDuplicating, createCabin } = useCreateCabin();
+  const { isLoading, mutate } = useDeleteCabin();
 
-  const querYClient = useQueryClient();
+  console.log(cabin)
 
-  const { isLoading, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin Successfully deleted");
-      querYClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { id, name, maxCapacity, regularPrice, discount, image, description } = cabin;
+
+  function handleDuplicate() {
+    createCabin({
+      name: `Copy of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
+  }
 
   return (
-    <TableRow role="row">
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity} guests</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
-      <button onClick={() => mutate(id)} disabled={isLoading}>
-        Delete
-      </button>
-    </TableRow>
+    <>
+      <TableRow role="row">
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity} guests</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        {discount ? (
+          <Discount>{formatCurrency(discount)}</Discount>
+        ) : (
+          <span>&mdash;</span>
+        )}
+        <div>
+          <button onClick={handleDuplicate} disabled={isDuplicating}>
+            <HiSquare2Stack />
+          </button>
+          <button onClick={() => setShow((show) => !show)}>
+            <HiPencil />
+          </button>
+          <button onClick={() => mutate(id)} disabled={isLoading}>
+            <HiTrash />
+          </button>
+        </div>
+      </TableRow>
+      {show && <CreateCabinForm cabinEdit={cabin} />}
+    </>
   );
 }
 
@@ -82,6 +104,7 @@ CabinRow.propTypes = {
     maxCapacity: PropTypes.any,
     name: PropTypes.any,
     regularPrice: PropTypes.any,
+    description: PropTypes.any,
   }),
 };
 
