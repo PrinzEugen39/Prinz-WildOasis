@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-import Input from "../../ui/Input.jsx";
-import Form from "../../ui/Form.jsx";
-import Button from "../../ui/Button.jsx";
-import FileInput from "../../ui/FileInput.jsx";
-import Textarea from "../../ui/Textarea.jsx";
+import Input from "../../../ui/Input.jsx";
+import Form from "../../../ui/Form.jsx";
+import Button from "../../../ui/Button.jsx";
+import FileInput from "../../../ui/FileInput.jsx";
+import Textarea from "../../../ui/Textarea.jsx";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCabin } from "../../services/apiCabins.js";
+import { createCabin } from "../../../services/apiCabins.js";
 import toast from "react-hot-toast";
-import CabinFormRow from "./CabinFormRow.jsx";
+import CabinFormRow from "../CabinFormRow.jsx";
 
 const FormRow = styled.div`
   display: grid;
