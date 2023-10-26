@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
 import {
@@ -182,6 +183,22 @@ function BookingDataBox({ booking }) {
       </Footer>
     </StyledBookingDataBox>
   );
+}
+
+BookingDataBox.propTypes = {
+  booking: PropTypes.shape({
+    cabinPrice: PropTypes.any,
+    created_at: PropTypes.any,
+    endDate: PropTypes.any,
+    extrasPrice: PropTypes.any,
+    hasBreakfast: PropTypes.any,
+    isPaid: PropTypes.any,
+    numGuests: PropTypes.number,
+    numNights: PropTypes.any,
+    observations: PropTypes.any,
+    startDate: PropTypes.any,
+    totalPrice: PropTypes.any
+  })
 }
 
 export default BookingDataBox;
