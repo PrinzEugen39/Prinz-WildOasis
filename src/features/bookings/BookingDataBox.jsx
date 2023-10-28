@@ -201,4 +201,5 @@ BookingDataBox.propTypes = {
   })
 }
 
+
 export default BookingDataBox;

@@ -3,12 +3,45 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
+import toast from "react-hot-toast";
+import { useLogin } from "./useLogin.js";
+import SpinnerMini from "../../ui/SpinnerMini.jsx";
+import { useUser } from "./useUser.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../../ui/Spinner.jsx";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { isAuthenticated, isLoading } = useUser();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("habibsan02@gmail.com");
+  const [password, setPassword] = useState("miku2001");
+  const { userLogin, isLoginIn } = useLogin();
 
-  function handleSubmit() {}
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+    } else {
+      userLogin(
+        { email, password },
+        {
+          onSettled: () => {
+            setEmail("");
+            setPassword("");
+          },
+        }
+      );
+    }
+  }
+
+  if (isLoading) return <Spinner />
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -20,6 +53,7 @@ function LoginForm() {
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isLoginIn}
         />
       </FormRowVertical>
       <FormRowVertical label="Password">
@@ -29,10 +63,13 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoginIn}
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={isLoginIn}>
+          {!isLoginIn ? "Login" : <SpinnerMini />}
+        </Button>
       </FormRowVertical>
     </Form>
   );
