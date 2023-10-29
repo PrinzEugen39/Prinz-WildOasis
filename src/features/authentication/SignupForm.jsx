@@ -13,9 +13,9 @@ function SignupForm() {
   const { errors } = formState;
   const { signup, isLoading } = useSignUp();
 
-  function onSubmit({ fullname, email, password }) {
+  function onSubmit({ fullName, email, password }) {
     signup(
-      { fullname, email, password },
+      { fullName, email, password },
       {
         onSettled: () => reset(),
       }
@@ -81,7 +81,7 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button $variation="secondary" type="reset" disabled={isLoading}>
+        <Button $variation="secondary" onClick={reset} disabled={isLoading}>
           Cancel
         </Button>
         <Button>{!isLoading ? "Sign up" : <SpinnerMini />}</Button>
