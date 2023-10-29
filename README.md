@@ -1,4 +1,4 @@
-# React + Vite
+
 
 # Prinz Wild Oasis
  <div style="display: flex; justify-content: center; align-items: center;">
@@ -9,7 +9,7 @@
 </div>
 
 ### Tech Used
-
+React + Vite + Supabase + Styled Components + Reactcharts + React Query + Date-fns + React-hook-form
 - [React](https://react.dev/) 
 - [React Query](https://tanstack.com/query/latest)
 - [Styled Components](https://styled-components.com/)
