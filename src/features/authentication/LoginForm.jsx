@@ -14,8 +14,8 @@ import Spinner from "../../ui/Spinner.jsx";
 function LoginForm() {
   const { isAuthenticated, isLoading } = useUser();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("habibsan02@gmail.com");
-  const [password, setPassword] = useState("miku2001");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { userLogin, isLoginIn } = useLogin();
 
   useEffect(() => {
